@@ -1,9 +1,15 @@
+import React from 'react'
+import Header from './components/Header/Header'
+import { Outlet } from 'react-router-dom'
+import Footer from './components/Footer/Footer'
 
 function App() {
 
   return (
     <>
-      <h1 className='text-center bg-red-400'>Vite + React</h1>
+      <Header />
+      <Outlet />
+      <Footer />
     </>
   )
 }
