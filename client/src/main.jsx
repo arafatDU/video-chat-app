@@ -4,12 +4,16 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import './index.css'
 import App from './App.jsx'
 import Home from './components/Home/Home.jsx'
+import Lobby from './pages/Lobby.jsx'
+import Room from './pages/Room.jsx'
 
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />} >
       <Route path="" element={<Home />} />
+      <Route path="chat" element={<Lobby />} /> 
+      <Route path='room/:roomId' element={<Room />} />
       
     </Route>
   )
