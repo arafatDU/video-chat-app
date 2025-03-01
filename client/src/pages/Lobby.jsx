@@ -11,7 +11,7 @@ const Lobby = () => {
   const handleSubmitForm = useCallback(
     (e) => {
       e.preventDefault();
-      navigate(`/room/${room}`);
+      console.log(email, room);
       
     },
     [email, room]
