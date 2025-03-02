@@ -134,8 +134,6 @@ const Room = () => {
       {remoteStream && 
         <div className='mt-5 p-5'>
           <h3 className='text-2xl m-3 py-3'>Remote Stream</h3>
-          <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold m-5 py-2 px-4 rounded' onClick={handleCallUser}>Accept</button>
-
           <ReactPlayer url={remoteStream} playing={true} height="200px" width="300px"/>
         </div>
       }
