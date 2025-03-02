@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useSocket } from '../context/SocketProvider';
+import peer from '../service/peer';
 import ReactPlayer from 'react-player';
 
 const Room = () => {
@@ -15,14 +16,27 @@ const Room = () => {
   const handleCallUser = useCallback(async () => {
     const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
     setMyStream(stream);
-  }, []);
+
+    const offer = await peer.getOffer();
+    socket.emit("user:call", { to: remoteSocketId, offer });
+
+  }, [remoteSocketId, socket]);
+
+
+  const handleIncommingCall = useCallback(async ({from, offer}) => {
+    console.log(from, offer);
+  }, [socket]);
   
+
   useEffect(() => {
     socket.on("user:joined", handleUserJoined);
+    socket.on("incoming:call", handleIncommingCall);
+
     return () => {
       socket.off("user:joined");
+      socket.off("incoming:call");
     }
-  }, [socket, handleUserJoined]);
+  }, [socket, handleUserJoined, handleIncommingCall]);
 
   return (
     <div className='items-center justify-center min-h-screen bg-gray-100'>
